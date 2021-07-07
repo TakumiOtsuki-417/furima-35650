@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| nickname           | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birth              | date   | null: false |
+| Column             | Type   | Options                                                               |
+| ------------------ | ------ | --------------------------------------------------------------------- |
+| email              | string | null: false                                                           |
+| encrypted_password | string | null: false, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i } |
+| nickname           | string | null: false                                                           |
+| last_name          | string | null: false, format: { with: /\A[ぁ-んァ-ン一-龥]/ }                    |
+| first_name         | string | null: false, format: { with: /\A[ぁ-んァ-ン一-龥]/ }                    |
+| last_name_kana     | string | null: false, format: { with: /\A[ァ-ヶー－]+\z/ }                      |
+| first_name_kana    | string | null: false, format: { with: /\A[ァ-ヶー－]+\z/ }                      |
+| birth              | date   | null: false                                                           |
 
 
 ### Association
@@ -63,7 +63,7 @@
 
 | Column        | Type       | Options                                                                              |
 | ------------- | ---------- | ------------------------------------------------------------------------------------ |
-| postal_code   | string     | null: false, numericality: { only_integer: true }, format: { with: /\A\d{7}\z/ }     |
+| postal_code   | string     | null: false, format: { with: /\A\d{3}[-]\d{4}\z/ }                                   |
 | prefecture_id | integer    | null: false, numericality: { other_than: 1 }                                         |
 | city          | string     | null: false                                                                          |
 | house_number  | string     | null: false                                                                          |
@@ -76,4 +76,5 @@
 - belongs_to :order
 
 ### Association (ActiveHash)
+
 - belongs_to :prefecture
