@@ -11,7 +11,7 @@
 | first_name         | string | null: false |
 | last_name_kana     | string | null: false |
 | first_name_kana    | string | null: false |
-| birth              | string | null: false |
+| birth              | date   | null: false |
 
 
 ### Association
@@ -68,7 +68,7 @@
 | city          | string     | null: false                                                                          |
 | house_number  | string     | null: false                                                                          |
 | building_name | string     |                                                                                      |
-| phone_number  | integer    | null: false, numericality: { only_integer: true }, format: { with: /\A\d{10,11}\z/ } |
+| phone_number  | string     | null: false, format: { with: /\A[0-9]+\z/ }, length: { maximum: 11 }                 |
 | order_id      | references | null: false, foreign_key: true                                                       |
 
 ### Association
