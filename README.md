@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options                                                               |
-| ------------------ | ------ | --------------------------------------------------------------------- |
-| email              | string | null: false                                                           |
-| encrypted_password | string | null: false, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i } |
-| nickname           | string | null: false                                                           |
-| last_name          | string | null: false, format: { with: /\A[ぁ-んァ-ン一-龥]/ }                    |
-| first_name         | string | null: false, format: { with: /\A[ぁ-んァ-ン一-龥]/ }                    |
-| last_name_kana     | string | null: false, format: { with: /\A[ァ-ヶー－]+\z/ }                      |
-| first_name_kana    | string | null: false, format: { with: /\A[ァ-ヶー－]+\z/ }                      |
-| birth              | date   | null: false                                                           |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth              | date   | null: false               |
 
 
 ### Association
@@ -21,17 +21,17 @@
 
 ## items テーブル
 
-| Column             | Type       | Options                                      |
-| ------------------ | ---------- | -------------------------------------------- |
-| name               | string     | null: false                                  |
-| description        | text       | null: false                                  |
-| price              | integer    | null: false, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 } |
-| genre_id           | integer    | null: false, numericality: { other_than: 1 } |
-| status_id          | integer    | null: false, numericality: { other_than: 1 } |
-| delivery_charge_id | integer    | null: false, numericality: { other_than: 1 } |
-| from_place_id      | integer    | null: false, numericality: { other_than: 1 } |
-| shipping_day_id    | integer    | null: false, numericality: { other_than: 1 } |
-| user_id            | references | null: false, foreign_key: true               |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| description        | text       | null: false                    |
+| price              | integer    | null: false                    |
+| genre_id           | integer    | null: false                    |
+| status_id          | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| from_place_id      | integer    | null: false                    |
+| shipping_day_id    | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -48,10 +48,10 @@
 
 ## orders テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -61,15 +61,15 @@
 
 ## addresses テーブル
 
-| Column        | Type       | Options                                                                              |
-| ------------- | ---------- | ------------------------------------------------------------------------------------ |
-| postal_code   | string     | null: false, format: { with: /\A\d{3}[-]\d{4}\z/ }                                   |
-| prefecture_id | integer    | null: false, numericality: { other_than: 1 }                                         |
-| city          | string     | null: false                                                                          |
-| house_number  | string     | null: false                                                                          |
-| building_name | string     |                                                                                      |
-| phone_number  | string     | null: false, format: { with: /\A[0-9]+\z/ }, length: { maximum: 11 }                 |
-| order_id      | references | null: false, foreign_key: true                                                       |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
