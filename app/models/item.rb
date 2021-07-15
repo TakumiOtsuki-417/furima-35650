@@ -23,7 +23,6 @@ class Item < ApplicationRecord
 
   # Association (ActiveHash)
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :status
   belongs_to :genre
   belongs_to :status
   belongs_to :delivery_charge
