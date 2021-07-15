@@ -139,6 +139,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
       end
+      it '販売価格は半角英数混合では保存できないこと' do
+        @item.price = "ab300"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+      end
     end
   end
 end
