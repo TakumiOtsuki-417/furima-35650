@@ -20,10 +20,8 @@ class ItemsController < ApplicationController
     find_item
   end
   def edit
-    find_item
   end
   def update
-    find_item
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -44,7 +42,7 @@ class ItemsController < ApplicationController
     end
   end
   def not_edit_by_other_user
-    unless current_user.id == Item.find(params[:id]).user_id
+    unless current_user.id == find_item.user_id
       redirect_to root_path
     end
   end
