@@ -19,7 +19,7 @@ class Item < ApplicationRecord
   # Association
   has_one_attached :image
   belongs_to :user
-  # has_one :order
+  has_one :order
 
   # Association (ActiveHash)
   extend ActiveHash::Associations::ActiveRecordExtensions
