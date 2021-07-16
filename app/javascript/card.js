@@ -2,7 +2,7 @@ const pay = () => {
   const submit = document.getElementById("button");
   submit.addEventListener("click", (e) => {
     e.preventDefault();
-    Payjp.setPublicKey("pk_test_27256ecc999fa1540d19e551");
+    Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
     const formResult = document.getElementById("charge-form");
     const formData = new FormData(formResult);
     const card = {
