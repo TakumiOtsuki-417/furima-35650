@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :not_move_nil_page, only: [:show, :edit]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :not_edit_by_other_user, only: [:edit, :update, :destroy]
+  before_action :not_edit_sold_item, only: [:edit, :update, :destroy]
   def index
     @items = Item.order("created_at DESC")
   end
@@ -47,6 +48,11 @@ class ItemsController < ApplicationController
   end
   def not_edit_by_other_user
     unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+  def not_edit_sold_item
+    if @item.order
       redirect_to root_path
     end
   end
